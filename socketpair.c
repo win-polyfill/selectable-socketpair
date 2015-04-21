@@ -86,7 +86,7 @@ int dumb_socketpair(SOCKET socks[2], int make_overlapped)
       WSASetLastError(WSAEINVAL);
       return SOCKET_ERROR;
     }
-    socks[0] = socks[1] = -1;
+    socks[0] = socks[1] = (SOCKET)-1;
 
     listener = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (listener == -1)
