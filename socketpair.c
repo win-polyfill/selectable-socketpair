@@ -134,7 +134,7 @@ int dumb_socketpair(SOCKET socks[2], int make_overlapped)
     closesocket(socks[0]);
     closesocket(socks[1]);
     WSASetLastError(e);
-    socks[0] = socks[1] = -1;
+    socks[0] = socks[1] = (SOCKET)-1;
     return SOCKET_ERROR;
 }
 #else
