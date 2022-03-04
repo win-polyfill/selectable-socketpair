@@ -50,7 +50,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string.h>
 
-#ifdef WIN32
+#ifdef _WIN32
 # include <ws2tcpip.h>  /* socklen_t, et al (MSVC20xx) */
 # include <windows.h>
 # include <io.h>
@@ -94,6 +94,9 @@ int dumb_socketpair(SOCKET socks[2], int make_overlapped)
 
     memset(&a, 0, sizeof(a));
     a.inaddr.sin_family = AF_INET;
+    /* https://en.wikipedia.org/wiki/Localhost */
+    /* IPv4 network standards reserve the entire address block 127.0.0.0/8 (more than 16 million addresses) for loopback purposes. */
+    /* Loopback address range:  */
     a.inaddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     a.inaddr.sin_port = 0;
 
